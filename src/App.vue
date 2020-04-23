@@ -1,15 +1,11 @@
 <template>
     <v-app>
-        <v-app-bar app color="primary" dark>
+        <v-app-bar app color="secondary" dark>
             <div class="d-flex align-center">
-                <v-img alt="Vuetify Logo" class="shrink mr-2" contain
-                       src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" transition="scale-transition"
-                       width="40"/>
-                <v-img alt="Vuetify Name" class="shrink mt-1 hidden-sm-and-down" contain min-width="100"
-                       src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png" width="100"/>
+                <v-img alt="Vuetify Logo" class="link shrink mr-2" contain src="@/assets/logo1.png" @click="$router.push('/')" transition="scale-transition"/>
             </div>
             <v-spacer></v-spacer>
-            <v-btn v-show="isAuthenticated" dark @click="exit">Выход</v-btn>
+            <v-btn color="red" v-show="isAuthenticated" dark @click="exit">Выход</v-btn>
         </v-app-bar>
         <v-content>
             <RouterView></RouterView>
@@ -52,3 +48,10 @@
         }
     };
 </script>
+
+<style>
+    .link {
+        cursor: pointer;
+    }
+
+</style>
