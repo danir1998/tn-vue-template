@@ -15,7 +15,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer/>
-                        <v-btn color="primary" @click="onAuth" :loading="isLoading">Авторизация</v-btn>
+                        <v-btn color="primary" @click.prevent="onAuth" :loading="isLoading">Авторизация</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
+    import { mapGetters } from "vuex";
 
     export default {
         name: "Auth",
@@ -36,7 +36,6 @@
         methods: {
             onAuth() {
                 const {username, password} = this;
-
                 this.$store.dispatch('login', {username, password})
                     .then(() => {
                         this.$router.go();

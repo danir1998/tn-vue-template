@@ -18,7 +18,7 @@
             HelloWorld
         },
         mounted() {
-            //this.$store.dispatch('fetchData').then(data => this.list = data);
+            this.$store.dispatch('fetchData').then(data => this.list = data);
         }
     }
 </script>

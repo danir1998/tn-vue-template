@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         token: localStorage.getItem('token') || '',
         loading: false,
-        info: ''
+        info: '',
     },
     mutations: {
         AUTH_LOGIN(state, token) {
@@ -19,13 +19,11 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        fetchData({commit}, payload) {
-            return new Promise((resolve) => {
-                axios.get('tuples', payload)
-                    .then(response => {
-                        resolve(response.data);
-                    })
-            })
+        async fetchData({commit}, payload) {
+            return await axios.get('tuples', payload)
+                .then(response => {
+                    return response.data;
+                })
         },
         logout({commit}) {
             return new Promise((resolve) => {
@@ -34,26 +32,25 @@ export default new Vuex.Store({
                 resolve(true);
             })
         },
-        login({commit, state}, payload) {
+        async login({commit, state}, payload) {
             state.loading = true;
-            return new Promise((resolve, reject) => {
-                axios.post('site/login', payload)
+            return new Promise(async (resolve, reject) => {
+                await axios.post('site/login', payload)
                     .then(response => {
                         const {data} = response;
                         localStorage.setItem('token', data.token);
+                        resolve(data.token);
                         commit('AUTH_LOGIN', data.token);
-                        resolve(data);
                     })
                     .catch(err => {
+                        reject();
                         localStorage.removeItem('token');
-                        commit('SET_INFO', 'Ошибка');
-                        reject(err);
+                        Vue.swal({ text: 'Ошибка', icon: "error" });
                     })
                     .finally(() => {
-                        commit('SET_INFO', '');
                         state.loading = false;
                     });
-            })
+            });
         }
     },
     getters: {

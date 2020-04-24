@@ -37,9 +37,8 @@
                 if (401 === error.response.status && error.config && !error.config.__isRetryRequest) {
                     self.$store.dispatch('logout').then(() => self.$router.go())
                 }
-            });
+           });
         },
-
         data: () => ({
             //
         }),
