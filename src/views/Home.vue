@@ -1,7 +1,7 @@
 <template>
     <div>
         <HelloWorld msg="Welcome to Your Vue.js App"/>
-        {{list}}
+<!--        {{list}}-->
     </div>
 </template>
 
@@ -18,7 +18,7 @@
             HelloWorld
         },
         mounted() {
-            this.$store.dispatch('fetchData').then(data => this.list = data);
+            // this.$store.dispatch('fetchData').then(data => this.list = data);
         }
     }
 </script>
